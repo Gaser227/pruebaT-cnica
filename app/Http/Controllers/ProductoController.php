@@ -16,18 +16,19 @@ class ProductoController extends Controller
     $productos = Producto::all();
     return view('productos.producto', ['productos' => $productos]);
     }
-
+    //Redireccionar
     public function redirectToProductos() {
         return redirect()->route('productos');
     }
-
+    //Controlador para redireccionar a la vista create
     public function create()
     {
         $categorias = Categoria::all();
         return view('productos.create', ['categorias' => $categorias]);
     }
+    //Controlador para el guardado
     public function store(Request $request)
-{
+    {
     $request->validate([
         'nombreProducto' => 'required',
         'precio' => 'required',
@@ -41,17 +42,16 @@ class ProductoController extends Controller
 
     return redirect()->route('productos')
         ->with('success', 'Producto creado correctamente.');
-}
-
+    }
+    //Controlador para redireccionar a la vista create
     public function edit(Producto $producto)
     {
         $categorias = Categoria::all();
         return view('productos.create', compact('producto', 'categorias'));
     }
-
-
+    //Controlador para la actualizacion
     public function update(Request $request, Producto $producto)
-{
+    {
     $request->validate([
         'nombreProducto' => 'required',
         'precio' => 'required',
@@ -63,9 +63,8 @@ class ProductoController extends Controller
 
     return redirect()->route('productos')
         ->with('success', 'Producto actualizado correctamente.');
-}
-
-
+    }
+    //Controlador para la eliminacion
     public function destroy(Producto $producto)
     {
         $producto->delete();
